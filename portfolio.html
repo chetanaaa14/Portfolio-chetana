@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Portfolio</title>
+  <style>
+    :root{
+      --bg:#0f1221;
+      --panel:#171b2e;
+      --accent:#7c9cff;
+      --text:#eaf0ff;
+      --muted:#9aa3c7;
+      --radius:18px;
+    }
+    *{box-sizing:border-box; margin:0; padding:0}
+    html{scroll-behavior:smooth}
+    body{
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.6;
+    }
+    header{
+      position:fixed; top:0; left:0; width:100%; background:rgba(23,27,46,0.95);
+      display:flex; justify-content:space-between; align-items:center;
+      padding:12px 8%; z-index:1000;
+    }
+    header nav a{
+      margin:0 12px; color:var(--muted); text-decoration:none; transition:.3s;
+    }
+    header nav a:hover{ color:var(--accent); }
+
+    section{
+      min-height:100vh; padding:80px 8% 60px; display:flex; flex-direction:column; justify-content:center;
+    }
+    h1,h2{color:var(--accent); margin-bottom:14px;}
+
+    #hero{ text-align:center; }
+    #hero h1{ font-size:clamp(32px,5vw,48px); }
+    #hero p{ max-width:560px; margin:16px auto; color:var(--muted); }
+
+    #about, #projects, #contact{ max-width:1000px; margin:auto; }
+    #about p{ color:var(--muted); }
+
+    .projects-grid{
+      display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:20px;
+    }
+    .project-card{
+      background:var(--panel); border-radius:var(--radius); padding:20px;
+      transition:transform .3s, box-shadow .3s; cursor:pointer;
+    }
+    .project-card:hover{
+      transform:translateY(-6px); box-shadow:0 10px 20px rgba(0,0,0,.4);
+    }
+
+    form input, form textarea{
+      width:100%; padding:12px; margin-bottom:12px; border:none;
+      border-radius:var(--radius); background:#1c213a; color:var(--text);
+    }
+    form button{
+      padding:12px 24px; border:none; border-radius:var(--radius);
+      background:var(--accent); color:white; cursor:pointer; transition:.3s;
+    }
+    form button:hover{ filter:brightness(1.1); }
+
+    footer{
+      text-align:center; padding:20px; color:var(--muted); background:#121529;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">MyPortfolio</div>
+    <nav>
+      <a href="#hero">Home</a>
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <section id="hero">
+    <h1>Hello, I'm <span style="color:var(--accent)">CHETANA</span></h1>
+    <p>A passionate developer skilled in building web applications, solving problems, and creating intuitive user experiences.</p>
+  </section>
+
+  <section id="about">
+    <h2>About Me</h2>
+    <p>
+      I am a [Your Role, e.g., Frontend Developer] with experience in HTML, CSS, JavaScript, and frameworks.
+      I love crafting clean, efficient code and designing smooth user interfaces. 
+      You can check my resume <a href="#" style="color:var(--accent)">here</a>.
+    </p>
+  </section>
+
+  <section id="projects">
+    <h2>Projects</h2>
+    <div class="projects-grid">
+      <div class="project-card">
+        <h3>Project One</h3>
+        <p>Brief description of your project. <a href="#" style="color:var(--accent)">View</a></p>
+      </div>
+      <div class="project-card">
+        <h3>Project Two</h3>
+        <p>Another cool project. <a href="#" style="color:var(--accent)">View</a></p>
+      </div>
+      <div class="project-card">
+        <h3>Project Three</h3>
+        <p>Yet another awesome build. <a href="#" style="color:var(--accent)">View</a></p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>Contact Me</h2>
+    <form>
+      <input type="text" placeholder="Your Name" required>
+      <input type="email" placeholder="Your Email" required>
+      <textarea rows="4" placeholder="Your Message" required></textarea>
+      <button type="submit">Send</button>
+    </form>
+  </section>
+
+  <footer>
+    © 2025 Your Name. Built with ♥
+  </footer>
+
+  <script>
+    // Simple fade-in animations on scroll
+    const faders=document.querySelectorAll('section');
+    const appearOpt={threshold:0.2};
+    const onScroll=new IntersectionObserver(function(entries,onScroll){
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          entry.target.style.opacity=1;
+          entry.target.style.transform='translateY(0)';
+          onScroll.unobserve(entry.target);
+        }
+      });
+    },appearOpt);
+    faders.forEach(sec=>{
+      sec.style.opacity=0; sec.style.transform='translateY(30px)'; sec.style.transition='all .8s ease-out';
+      onScroll.observe(sec);
+    });
+  </script>
+</body>
+</html>
